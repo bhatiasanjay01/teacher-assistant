@@ -1,0 +1,155 @@
+<app-demo-sidebar>
+  <nz-steps [nzCurrent]="1"
+            nzProgressDot
+            [nzCurrent]="index()"
+            (nzIndexChange)="onIndexChange($event)">
+    <nz-step nzTitle="Select Teaching Content"></nz-step>
+    <nz-step nzTitle="Class Content"></nz-step>
+    <nz-step nzTitle="Ongoing Class"></nz-step>
+    <nz-step nzTitle="After Homework"
+             nzDescription=""></nz-step>
+  </nz-steps>
+
+
+  <div class="select-teaching-content"
+       *ngIf="index() === 0">
+
+    <h1>What do you want to teach for Prealgebra?</h1>
+
+    <div class="item-list">
+      <nz-checkbox-wrapper style="width: 100%;">
+        <div nz-row>
+          <div nz-col
+               nzSpan="16"
+               *ngFor="let option of algebraTopicsOptions">
+            <label nz-checkbox
+                   [nzValue]="option.value"
+                   [(ngModel)]="option.checked">{{option.label}}</label>
+          </div>
+        </div>
+      </nz-checkbox-wrapper>
+    </div>
+
+    <button class="generate-btn"
+            nz-button
+            nzType="primary"
+            nzSize="default"
+            (click)="onGenerateClassContentClick()">
+      Generate Class Content
+    </button>
+  </div>
+
+  <div id="pdfDoc"
+       #pdfDoc
+       *ngIf="index() === 1">
+    <div *ngIf="isLoading()">
+      <h3>It may take for 5~10 seconds.</h3>
+      <nz-skeleton [nzActive]="true"></nz-skeleton>
+    </div>
+    <div class="all-class-content-list"
+         *ngIf="!isLoading()">
+
+      <nz-switch [ngModel]="pdfMode()"
+                 (ngModelChange)="onPdfMode($event)">PDF Mode</nz-switch> PDF Mode
+      <button nz-button
+              nzType="primary"
+              nzSize="default"
+              (click)="onDownloadPdfClick()">
+        <span nz-icon
+              style="font-size: 16px;"
+              class="material-icons-outlined">picture_as_pdf</span>
+        Download PDF
+      </button>
+
+      <div class="one-class-content"
+           *ngFor="let classContent of classContentList()">
+        <ng-container *ngIf="classContent">
+
+          <h1>{{classContent.title}}
+            <button *ngIf="!pdfMode()"
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    (click)="onRegenerateClick(classContent)">
+              <span nz-icon
+                    style="font-size: 16px;"
+                    class="material-icons-outlined">autorenew</span>
+              Regenerate
+            </button>
+          </h1>
+
+          <app-ai-is-loading [isLoading]="isLoading()"></app-ai-is-loading>
+
+          <h2>Objective</h2>
+          <div>{{classContent.objective}}</div>
+
+          <div class="section-header">
+            <h2>Examples</h2>
+
+            <div *ngIf="!pdfMode()">Count: {{classContent.examples.length}}</div>
+
+            <button *ngIf="!pdfMode()"
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    (click)="onNewExampleClick(classContent)">
+              <span nz-icon
+                    style="font-size: 16px;"
+                    class="material-icons-outlined">add</span>
+              Add One Example
+            </button>
+          </div>
+          <div *ngFor="let example of classContent.examples; let i = index">
+            <app-markdown-it class="popover-content"
+                             [markdown]="example.question"></app-markdown-it>
+
+            <app-markdown-it class="popover-content"
+                             [markdown]="example.answer"></app-markdown-it>
+
+            <button *ngIf="!pdfMode()"
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    [nzDanger]="true"
+                    (click)="onRemoveExampleClick(classContent, i)">
+              Remove
+            </button>
+            <hr>
+          </div>
+
+          <h2>Practice Problems <button *ngIf="!pdfMode()"
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    (click)="onNewPracticeClick(classContent)">
+              <span nz-icon
+                    style="font-size: 16px;"
+                    class="material-icons-outlined">add</span>
+              Add One Practice
+            </button></h2>
+
+
+          <div *ngFor="let practiceProblem of classContent.practiceProblems; let i = index">
+            <app-markdown-it class="popover-content"
+                             [markdown]="practiceProblem.question"></app-markdown-it>
+
+            <button *ngIf="!pdfMode()"
+                    nz-button
+                    nzType="default"
+                    nzSize="small"
+                    [nzDanger]="true"
+                    (click)="onRemovePracticeClick(classContent, i)">
+              Remove
+            </button>
+            <hr>
+          </div>
+
+          <h2>Conclusion</h2>
+          <app-markdown-it class="popover-content"
+                           [markdown]="classContent.conclusion"></app-markdown-it>
+
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</app-demo-sidebar>

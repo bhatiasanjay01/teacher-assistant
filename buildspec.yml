@@ -1,0 +1,72 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      # Install the frontend
+      - cd frontend
+      - npm install
+      - cd ..
+      # Install Frontend
+      - cd frontend
+      - rm -f ./src/environments/environment.ts
+      - cp ./src/environments/environment.$ENV.web.ts ./src/environments/environment.ts
+      - cd ..
+      # Install Backend
+      - cd backend
+      - rm -f ./src/environments/environment.ts
+      - cp ./src/environments/environment.$ENV.txt ./src/environments/environment.ts
+      - npm install
+      - npm run build
+      # Install CDK
+      - cd cdk
+      - sed -i "s/replaced-by-code-build/$ENV/g" environment.ts
+      - npm install
+      - cd ..
+      - cd ..
+  pre_build:
+    commands:
+      # Pre-build the frontend
+      - cd frontend
+      - sed -i "s/local/1.0.$CODEBUILD_BUILD_NUMBER/g" ./src/version.ts
+      - cd ..
+      # Backend
+      - cd backend
+      # Discover and run unit tests in the '__tests__' directory
+      # - npm run test
+      # Remove all dependencies not needed for the Lambda deployment package (the packages from devDependencies in package.json)
+      - npm prune --production
+      # Copy artifacts to a separate folder
+      - mkdir function-code
+      - cp -r ./dist function-code
+      # Make layer
+      - cd dist
+      - mkdir nodejs
+      - cd nodejs
+      - mkdir nodejs
+      - mv ../../node_modules ./nodejs
+      # Remove aws-sdk -> because lambda has it.
+      - rm -rf ./nodejs/node_modules/aws-sdk
+      - zip -r node_modules.zip .
+      - aws s3 cp node_modules.zip s3://$S3_BUCKET/$CODEBUILD_BUILD_ID/
+      - cd ..
+      - cd ..
+      - cd ..
+  build:
+    commands:
+      # Build the frontend
+      - cd frontend
+      - npm run build-$ENV-web
+      - npm run prepare-ngsw-config
+      - aws s3 sync ./dist/frontend s3://teacher-assistant-website-$ENV --delete
+      - cd ..
+      # Archive Lambda function code and upload it to S3
+      - cd backend
+      - cd function-code
+      - zip -r function-code.zip .
+      - aws s3 cp function-code.zip s3://$S3_BUCKET/$CODEBUILD_BUILD_ID/
+      # Use AWS CDK to synthesize the application
+      - cd ../cdk
+      - ./node_modules/.bin/cdk synth > ../../template-export.yml
+artifacts:
+  files:
+    - template-export.yml

@@ -1,0 +1,86 @@
+export const environment = {
+  isProd: true,
+
+  awsSecretName: 'arn:aws:secretsmanager:us-east-2:778684586574:secret:prod/teacher-assistant-wEFMXV',
+
+  environmentName: 'prod',
+
+  oncallEmailSender: 'MindCraft Alarm <airclickid@gmail.com>',
+  oncallList: ['peikang.hu@gmail.com'],
+
+  systemLogS3Bucket: 'agile-planning-tool-log',
+
+  recently: { months: 3 },
+
+  lambdaWebSocketConnectionUrl: 'https://nzuc9v5gs1.execute-api.us-east-2.amazonaws.com/prod',
+
+  loadFileUrl: 'files.mindcraftsmart.com',
+
+  eventBridgeArn: 'arn:aws:lambda:us-east-2:778684586574:function:prod-eventBridge-task-ai',
+  eventBridgeRoleArn: 'arn:aws:iam::778684586574:role/service-role/Amazon_EventBridge_Scheduler_LAMBDA_12178d263d',
+
+  openSearch: {
+    host: 'get-from-aws-secret',
+    accessKeyId: 'get-from-aws-secret',
+    secretAccessKey: 'get-from-aws-secret',
+  },
+
+  filestack: {
+    secret: 'get-from-aws-secret',
+  },
+
+  slack: {
+    airClickAppName: 'MindCraft',
+    clientId: 'get-from-aws-secret',
+    clientSecret: 'get-from-aws-secret',
+    signingSecret: 'get-from-aws-secret',
+    returnUrl: 'get-from-aws-secret',
+  },
+
+  domain: 'https://webapp.mindcraftsmart.com',
+
+  auth0: {
+    audience: 'https://teaching-assistant-prod.us.auth0.com/api/v2/',
+    domain: 'get-from-aws-secret',
+    clientId: 'get-from-aws-secret',
+    clientSecret: 'get-from-aws-secret',
+  },
+  
+  airtable: {
+    key: 'get-from-aws-secret',
+  },
+
+  github: {
+    appId: 'get-from-aws-secret',
+    clientId: 'get-from-aws-secret',
+    clientSecret: 'get-from-aws-secret',
+    webhookSecret: 'get-from-aws-secret',
+    privateKey: 'get-from-aws-secret',
+  },
+
+  google: {
+    clientId: 'get-from-aws-secret',
+    clientSecret: 'get-from-aws-secret',
+  },
+
+  whatsapp: {
+    phoneNumberId: 'get-from-aws-secret',
+    verifyToken: 'get-from-aws-secret',
+    token: 'get-from-aws-secret',
+  },
+
+  openai: {
+    secretKey: 'get-from-aws-secret',
+  },
+
+  sfExpress: {
+    customerCode: 'get-from-aws-secret',
+    sandboxCode:'get-from-aws-secret',
+    productionCode: 'get-from-aws-secret',
+  },
+
+  stripe: {
+    secretKey: 'get-from-aws-secret',
+    webhookSecretKey: 'get-from-aws-secret',
+  },
+}

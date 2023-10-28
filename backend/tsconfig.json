@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2021",
+    "lib": ["dom", "ES2021"],
+    "outDir": "dist",
+    "sourceMap": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/environments/environment.staging.txt",
+    "src/environments/environment.prod.txt",
+    "../frontend/src/app/core/openai/openai.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

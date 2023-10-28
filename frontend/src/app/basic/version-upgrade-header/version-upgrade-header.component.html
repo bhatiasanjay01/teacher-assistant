@@ -1,0 +1,10 @@
+<nz-alert *ngIf="isShow"
+          nzType="warning"
+          nzMessage="A new version is available to use"
+          [nzAction]="actionTemplate3"></nz-alert>
+<ng-template #actionTemplate3>
+  <button nz-button
+          nzSize="small"
+          nzType="primary"
+          (click)="onUpgradeClick()">Refresh page to upgrade</button>
+</ng-template>

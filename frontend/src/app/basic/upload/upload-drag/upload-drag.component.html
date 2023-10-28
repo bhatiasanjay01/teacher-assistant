@@ -1,0 +1,13 @@
+<nz-upload nzType="drag"
+           [nzMultiple]="false"
+           [nzCustomRequest]="uploadFileHandler"
+           (nzChange)="handleChange($event)">
+  <p class="ant-upload-drag-icon">
+    <i nz-icon
+       nzType="inbox"></i>
+  </p>
+  <p class="ant-upload-text">{{text}}</p>
+  <p class="ant-upload-hint">
+    Please Upload Only One File under 5MB.
+  </p>
+</nz-upload>

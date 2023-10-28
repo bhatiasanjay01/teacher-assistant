@@ -1,0 +1,208 @@
+<app-demo-sidebar>
+  <h1>Prealgebra</h1>
+  <br>
+  <nz-steps [nzCurrent]="1"
+            nzProgressDot
+            [nzCurrent]="index()"
+            (nzIndexChange)="onIndexChange($event)">
+    <nz-step nzTitle="Register"
+             nzDescription="Learn your interests."></nz-step>
+    <nz-step nzTitle="Upload Homework"
+             nzDescription="Assess your progress automatically."></nz-step>
+    <nz-step nzTitle="Review your progress"
+             nzDescription=""></nz-step>
+    <nz-step nzTitle="Do Homework"
+             nzDescription=""></nz-step>
+  </nz-steps>
+
+  <div class="main-body">
+
+    <ng-container *ngIf="index() === 0">
+      <div class="item">
+        <div class="label">
+          Preferred Name:
+        </div>
+        <div class="control">
+          <input nz-input
+                 placeholder="Your Name"
+                 [(ngModel)]="preferredName"
+                 type="string" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">
+          What do you like?
+        </div>
+        <div class="control">
+          <nz-checkbox-wrapper style="width: 100%;">
+            <div nz-row>
+              <div nz-col
+                   nzSpan="8"
+                   *ngFor="let option of getAllInterestsOptions">
+                <label nz-checkbox
+                       [nzValue]="option.value"
+                       [(ngModel)]="option.checked">{{option.label}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">
+          Favorite famous person's name:
+        </div>
+        <div class="control">
+          <input nz-input
+                 placeholder="Your Name"
+                 [(ngModel)]="famousePersonName"
+                 type="string" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">
+          What do you want to do in the future?
+        </div>
+        <div class="control">
+          <nz-checkbox-wrapper style="width: 100%;">
+            <div nz-row>
+              <div nz-col
+                   nzSpan="8"
+                   *ngFor="let option of getJobTypesOptions">
+                <label nz-checkbox
+                       [nzValue]="option.value"
+                       [(ngModel)]="option.checked">{{option.label}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="index() === 1">
+      <h1>Availble in November</h1>
+
+      <nz-upload [nzDisabled]="true"
+                 nzType="drag"
+                 [nzMultiple]="true"
+                 nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76">
+        <p class="ant-upload-drag-icon">
+          <span nz-icon
+                nzType="inbox"></span>
+        </p>
+        <p class="ant-upload-text">Click or drag your homework pdfs or photos to this area to upload</p>
+        <p class="ant-upload-hint">
+        </p>
+      </nz-upload>
+
+      <div class="homework-demo">
+        <div>
+          <img width="400px"
+               src="/assets/images/homework33.png">
+        </div>
+
+        <div class="question-feedback">
+          <img width="400px"
+               src="/assets/images/question1.png">
+
+          <img width="400px"
+               src="/assets/images/question2_3.png">
+
+          <img width="400px"
+               src="/assets/images/question4.png">
+        </div>
+      </div>
+      <div class="feedback">
+        <img width="400px"
+             src="/assets/images/question_feedback.png">
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="index() === 2">
+      <nz-list nzBordered
+               nzSize="small">
+        <nz-list-header>All Topics for Prealgebra</nz-list-header>
+        <li nz-list-item
+            *ngFor="let item of algebraTopics">
+          <ul nz-list-item-actions>
+            <nz-list-item-action>
+              <a (click)="onExerciseClick(item)">Exercise</a> ({{item.hours}}hrs)
+            </nz-list-item-action>
+          </ul>
+          <div class="list-content">
+            <div class="title">{{item.title}}</div>
+            <div class="topic-progress">
+              <nz-progress [nzPercent]="item.progress"></nz-progress>
+            </div>
+
+          </div>
+        </li>
+      </nz-list>
+
+      <nz-list *ngIf="selectedTopic"
+               nzBordered
+               nzSize="small">
+        <nz-list-header>
+          <div class="header">
+            Exercise for {{selectedTopic.title}}
+            <div class="buttons">
+              <button nz-button
+                      nzType="default"
+                      nzSize="small"
+                      (click)="onAddQuestionClick()">
+                <span nz-icon
+                      style="font-size: 16px;"
+                      class="material-icons-outlined">add</span>
+                New Question
+              </button>
+            </div>
+          </div>
+        </nz-list-header>
+
+        <nz-empty class="empty-topic"
+                  *ngIf="selectedTopic.topicQuestionList.length === 0 && !isLoading()"
+                  [nzNotFoundContent]="'No Questions'"></nz-empty>
+        <app-ai-is-loading [isLoading]="isLoading()"></app-ai-is-loading>
+        <li nz-list-item
+            *ngFor="let item of selectedTopic.topicQuestionList">
+          <ul nz-list-item-actions>
+            <!-- <nz-list-item-action>
+   <a (click)="onExerciseClick(item)">Exercise ({{item.topicQuestionList.length}})</a>
+ </nz-list-item-action> -->
+          </ul>
+          <div class="question-list-content">
+            <app-homework-question [topicQuestion]="item"></app-homework-question>
+          </div>
+        </li>
+      </nz-list>
+    </ng-container>
+
+    <ng-container *ngIf="index() === 3">
+      <nz-list nzBordered
+               nzSize="small">
+        <nz-list-header>
+          <div class="header">
+            Homework
+          </div>
+        </nz-list-header>
+        <li nz-list-item
+            *ngFor="let item of homeworkQuestionList">
+          <ul nz-list-item-actions>
+          </ul>
+          <div class="question-list-content">
+            <app-homework-question [topicQuestion]="item"></app-homework-question>
+          </div>
+        </li>
+      </nz-list>
+    </ng-container>
+  </div>
+
+  <!-- <button nz-button
+        nzType="default"
+        nzSize="small"
+        (click)="onCallOpenAiClick()">
+  <span nz-icon
+        style="font-size: 16px;"
+        class="material-icons-outlined">arrow_outward</span>
+  Call OpenAI
+</button> -->
+</app-demo-sidebar>

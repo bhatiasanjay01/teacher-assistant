@@ -1,0 +1,12 @@
+.item-list {
+  margin-top: 30px;
+}
+
+.select-teaching-content {
+  display: flex;
+  flex-direction: column;
+
+  .generate-btn {
+    align-self: center;
+  }
+}

@@ -1,0 +1,69 @@
+<a class="logo"
+   href="https://www.mindcraftsmart.com/">
+     <img src="/assets/icons/logo.png">
+</a>
+<img class="background"
+     src="/assets/images/background.png">
+
+<div class="card registration"
+     *ngIf="isSuccess() === undefined">
+     <div class="badge">
+          Receive your free homework evaluation within 24 hours!
+     </div>
+
+     <div>
+          <label for="Name">Name</label>
+          <input class="input"
+                 name="Name"
+                 data-name="Name"
+                 placeholder="Full Name"
+                 [(ngModel)]="fullName">
+     </div>
+
+     <div>
+          <label for="Email">Email Address</label>
+          <input class="input"
+                 name="Email"
+                 data-name="Email"
+                 placeholder="Enter your email"
+                 [(ngModel)]="email">
+     </div>
+
+     <div>
+          <label for="Others">Message</label>
+          <input class="input"
+                 name="Others"
+                 data-name="Others"
+                 placeholder="Anything you want to add..."
+                 [(ngModel)]="others">
+     </div>
+
+     <app-upload-drag *ngIf="!fileLoaded()"
+                      [uploadFileHandler]="uploadFileHandler.bind(this)"
+                      [text]="'Drag or click to upload your homework files or images in this section.'"></app-upload-drag>
+     <nz-result *ngIf="fileLoaded()"
+                nzStatus="success"
+                nzTitle="Successfully Uploaded Your Homework!"
+                nzSubTitle="We will send your homework evaluation back within 24 hours!">
+     </nz-result>
+
+
+     <div class="btn-secondary"
+          (click)="onDemoHomeworkClick()">
+          Demo
+     </div>
+
+     <div *ngIf="!isLoading()"
+          class="btn-primary submit"
+          (click)="onSubmitClick()">Submit</div>
+     <div *ngIf="isLoading()"
+          class="btn-primary submit">Submitting</div>
+</div>
+
+<div class="card success"
+     *ngIf="isSuccess()">
+     <img class="success-icon"
+          src="/assets/images/success.png">
+     <div class="title">Thank you</div>
+     <div class="content">Thanks for reaching out. We will get back to you soon.</div>
+</div>

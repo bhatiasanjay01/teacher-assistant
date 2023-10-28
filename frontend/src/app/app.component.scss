@@ -1,0 +1,19 @@
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
+.version {
+  z-index: 80000;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 14px;
+  padding: 2px 8px;
+  backdrop-filter: blur(10px);
+  background-color: #f8f8f8;
+  // border: solid 1px #cccccc;
+  color: #aaaaaa;
+  border-top-right-radius: 4px;
+}

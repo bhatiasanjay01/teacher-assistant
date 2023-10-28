@@ -1,0 +1,10 @@
+<button *ngIf="!show"
+        nz-button
+        nzType="default"
+        nzSize="small"
+        (click)="onToggleClick()">
+  {{showText}}
+</button>
+<div *ngIf="show">
+  <app-markdown-it [markdown]="text ?? ''"></app-markdown-it>
+</div>

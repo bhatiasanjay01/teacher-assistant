@@ -1,0 +1,60 @@
+.main-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin-top: 20px;
+}
+
+.question-feedback {
+  width: 400px;
+}
+
+.feedback {
+  margin-top: 10px;
+  margin-bottom: 30px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.control {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.topic-progress {
+  width: 100px;
+}
+
+.list-content {
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-direction: row;
+  gap: 10px;
+
+  .title {
+    min-width: 350px;
+  }
+}
+
+.question-list-content {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.homework-demo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+}

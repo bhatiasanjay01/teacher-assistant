@@ -1,0 +1,31 @@
+<div class="title">{{topicQuestion.question}}</div>
+<div class="student-answer">
+  <input nz-input
+         placeholder="Your answers"
+         [(ngModel)]="studentAnswer"
+         type="number" />
+</div>
+
+<div class="steps">
+  <app-show-hide-text [showText]="'Hints'"
+                      [text]="topicQuestion.stepsToSolveQuestions"></app-show-hide-text>
+</div>
+<div class="answer">
+  <app-show-hide-text [showText]="'Show Answer'"
+                      [text]="topicQuestion.answer"></app-show-hide-text>
+</div>
+
+<div class="buttons">
+  <button nz-button
+          nzType="default"
+          nzSize="small"
+          (click)="onSimplerQuestionClick()">
+    Need a simpler question.
+  </button>
+  <button nz-button
+          nzType="default"
+          nzSize="small"
+          (click)="onHarderQuestionClick()">
+    Need a harder question.
+  </button>
+</div>

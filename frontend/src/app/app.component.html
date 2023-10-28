@@ -1,0 +1,13 @@
+<div class="sticky-head">
+  <app-version-upgrade-header></app-version-upgrade-header>
+  <nz-alert *ngIf="!isOnline()"
+            nzType="error"
+            nzMessage="Network Connection Error"
+            nzDescription="Please note that any unsaved data may be lost during this offline period."
+            nzShowIcon></nz-alert>
+</div>
+<router-outlet></router-outlet>
+<div class="version"
+     appDarkModeColor>
+  {{version()}}
+</div>

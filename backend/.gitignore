@@ -1,0 +1,7 @@
+node_modules
+function-code
+dist
+coverage
+cdk/cdk.out
+cdk/node_modules
+template.yaml

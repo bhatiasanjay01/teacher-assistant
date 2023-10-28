@@ -1,0 +1,454 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+p {
+  font-size: 16px;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 10px;
+}
+
+nz-empty {
+  margin-top: 20px !important;
+}
+
+markdown-it {
+  ol {
+    li {
+      list-style-type: number;
+      margin-left: 18px;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+h1 {
+  font-size: 24px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+
+  margin-bottom: 7px !important;
+}
+
+h2 {
+  font-size: 22px !important;
+  font-weight: bold !important;
+
+  margin-bottom: 7px !important;
+}
+
+h3 {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+h4 {
+  font-size: 18px !important;
+  margin-bottom: 5px !important;
+}
+
+// tiptap
+.auto-create-editor {
+  min-height: 136px;
+}
+.tiptap {
+  padding: 3px;
+  > * + * {
+    margin-top: 0.25em;
+  }
+}
+
+.hljs-string {
+  color: #b9f18d !important;
+}
+
+.tiptap {
+  img {
+    max-width: 100% !important;
+  }
+
+  blockquote {
+    border-left: 3px solid rgba(#0d0d0d, 0.1);
+    padding-left: 1rem;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    border-radius: 0.25em;
+    box-decoration-break: clone;
+    color: #616161;
+    font-size: 0.9rem;
+    padding: 0.25em;
+  }
+
+  pre {
+    background: #000000;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+
+    code {
+      background: none;
+      color: inherit;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+
+    td,
+    th {
+      min-width: 1em;
+      border: 2px solid #ced4da;
+      padding: 3px 5px;
+      vertical-align: top;
+      box-sizing: border-box;
+      position: relative;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    th {
+      font-weight: bold;
+      text-align: left;
+      background-color: #f1f3f5;
+    }
+
+    .selectedCell:after {
+      z-index: 2;
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(200, 200, 255, 0.4);
+      pointer-events: none;
+    }
+
+    .column-resize-handle {
+      position: absolute;
+      right: -2px;
+      top: 0;
+      bottom: -2px;
+      width: 4px;
+      background-color: #adf;
+      pointer-events: none;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.tableWrapper {
+  padding: 1rem 0;
+  overflow-x: auto;
+}
+
+.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+
+.mention {
+  border: 1px solid #000;
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.3rem;
+  box-decoration-break: clone;
+}
+
+// placeholder
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+}
+
+.cdk-drag-handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.unselectable {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+// Fix Graph
+.nz-graph-edges .nz-graph-edge path {
+  stroke-width: 1px !important;
+  stroke: #8b8a8a;
+}
+
+#edge-end-arrow {
+  color: #8b8a8a !important;
+  fill: #8b8a8a !important;
+}
+
+// Quilljs
+.ql-container {
+  font-size: 16px;
+}
+
+.ql-editor.ql-blank::before {
+  font-size: 16px;
+  font-style: normal;
+  margin-left: -10px;
+  color: lightgray;
+}
+
+no-data {
+  color: #bfbfbf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div[nz-submenu-title] {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+// Fix tab
+.ant-tabs-tab-btn {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+// Fix divider
+.ant-divider-horizontal {
+  margin: 5px 0 !important;
+}
+
+// Fix grid
+.ant-row {
+  align-items: center !important;
+}
+
+// Fix Popover
+.ant-popover-buttons {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+// Fix modal
+.ant-modal-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+}
+
+// Fix button
+.ant-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ant-btn > .anticon + span,
+.ant-btn > span + .anticon {
+  margin-left: 4px !important;
+}
+
+.ant-btn-icon-only {
+  padding: 0 !important;
+}
+
+// Fix dropdown
+li[nz-menu-item] span[nz-icon] {
+  padding-right: 5px;
+}
+
+.ant-select-single.ant-select-open .ant-select-selection-item {
+  color: inherit !important;
+  opacity: 0.5 !important;
+}
+
+.hide-select-item-background {
+  nz-select-item {
+    margin-inline-end: -4px !important;
+    padding-inline-end: 0 !important;
+
+    background: none !important;
+    border: none !important;
+  }
+
+  .ant-select-selection-item-remove {
+    display: none !important;
+  }
+}
+// Fix list
+nz-list-header {
+  font-weight: 500 !important;
+}
+
+li[nz-menu-item] span[nz-icon] {
+  padding-right: 0px !important;
+}
+
+// Fix label
+// label[nz-checkbox] {
+//   display: flex !important;
+//   align-items: center !important;
+// }
+
+// .ant-checkbox {
+//   position: inherit !important;
+// }
+
+// Fix Quill and Block
+.ql-tooltip {
+  display: none !important;
+}
+
+.block-editor {
+  p {
+    font-size: 16px;
+  }
+
+  markdown-it {
+    display: block;
+  }
+}
+
+.ql-editor {
+  padding: 0 !important;
+}
+
+// Menu
+.menu-icon {
+  margin-right: 5px;
+}
+
+// Fix And Menu <a> does not hide.
+.ant-menu-item .anticon + a {
+  margin-left: 10px;
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), margin 0.3s,
+    color 0.3s;
+}
+
+.ant-menu.ant-menu-inline-collapsed > .ant-menu-item .anticon + a {
+  display: inline-block;
+  opacity: 0;
+}
+
+// Tooltip
+
+.tooltip-picture-container {
+  text-align: left;
+  width: 260px;
+  padding: 10px;
+
+  z-index: 100000 !important;
+  position: fixed;
+
+  // margin: 10px !important;
+  font-size: 14px !important;
+
+  background: #010712b5 !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+
+  color: #dbe8ff;
+  box-sizing: border-box;
+
+  opacity: 0;
+
+  animation: tooltip-slide 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.tooltip-container {
+  text-align: center;
+  z-index: 100000 !important;
+  position: fixed;
+  padding: 6px 12px;
+
+  // margin: 10px !important;
+  font-size: 14px !important;
+
+  background: #010712b5 !important;
+
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+
+  color: white;
+  width: auto;
+
+  box-sizing: border-box;
+
+  opacity: 0;
+
+  animation: tooltip-slide 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+@keyframes tooltip-slide {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate(0, -30%);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.99) translate(0, -3%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
